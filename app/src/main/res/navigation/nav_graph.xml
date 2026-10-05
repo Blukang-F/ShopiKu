@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- ── Tab: Beranda ─────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.shopiku.ui.home.HomeFragment"
+        android:label="Beranda"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_productList"
+            app:destination="@id/productListFragment" />
+        <action
+            android:id="@+id/action_home_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_home_to_cart"
+            app:destination="@id/cartFragment" />
+    </fragment>
+
+    <!-- ── Tab: Kategori ────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.shopiku.ui.category.CategoryFragment"
+        android:label="Kategori"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_category_to_productList"
+            app:destination="@id/productListFragment" />
+    </fragment>
+
+    <!-- ── Tab: Favorit ─────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.shopiku.ui.favorite.FavoriteFragment"
+        android:label="Favorit"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favorite_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <!-- ── Tab: Pesanan ─────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.shopiku.ui.orders.OrdersFragment"
+        android:label="Pesanan"
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_orders_to_tracking"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+
+    <!-- ── Tab: Profil ──────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.shopiku.ui.profile.ProfileFragment"
+        android:label="Akun"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_to_tracking"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+
+    <!-- ── Product List ─────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.shopiku.ui.product.ProductListFragment"
+        android:label="Produk"
+        tools:layout="@layout/fragment_product_list">
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Produk" />
+        <action
+            android:id="@+id/action_productList_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <!-- ── Product Detail ───────────────────────────────────── -->
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.shopiku.ui.product.ProductDetailFragment"
+        android:label="Detail Produk"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="productId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productDetail_to_cart"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_productDetail_to_review"
+            app:destination="@id/reviewFragment" />
+    </fragment>
+
+    <!-- ── Cart ─────────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.shopiku.ui.cart.CartFragment"
+        android:label="Keranjang Saya"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cart_to_checkout"
+            app:destination="@id/checkoutFragment" />
+        <action
+            android:id="@+id/action_cart_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ── Checkout ──────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.shopiku.ui.checkout.CheckoutFragment"
+        android:label="Checkout"
+        tools:layout="@layout/fragment_checkout">
+        <action
+            android:id="@+id/action_checkout_to_payment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+
+    <!-- ── Payment ───────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.shopiku.ui.payment.PaymentFragment"
+        android:label="Pembayaran"
+        tools:layout="@layout/fragment_payment">
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+        <argument
+            android:name="totalAmount"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_payment_to_tracking"
+            app:destination="@id/trackingFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
+    <!-- ── Tracking ──────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.shopiku.ui.tracking.TrackingFragment"
+        android:label="Detail Pesanan"
+        tools:layout="@layout/fragment_tracking">
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_tracking_to_review"
+            app:destination="@id/reviewFragment" />
+    </fragment>
+
+    <!-- ── Review ────────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.shopiku.ui.review.ReviewFragment"
+        android:label="Ulasan"
+        tools:layout="@layout/fragment_review">
+        <argument
+            android:name="productId"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+</navigation>
